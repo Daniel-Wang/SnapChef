@@ -2,7 +2,6 @@ package danielwang.com.visionchef;
 
 import android.widget.BaseAdapter;
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +13,41 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * Created by Kevin on 1/28/17.
  */
 
-class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends BaseAdapter {
 
     private final String LOG_TAG = ImageAdapter.class.getSimpleName();
 
     private Context mContext;
-    public int numElements;
-    private JSONArray recipes;
-    public int pageNum;
+    private JSONArray mRecipes;
 
     //Constructor
     public ImageAdapter(Context c) {
         mContext = c;
-        numElements = 0;
-        recipes = new JSONArray();
-        pageNum = 1;
+        mRecipes = new JSONArray();
+    }
+
+    public JSONArray getRecipes() {
+        return mRecipes;
+    }
+
+    public void addRecipes(JSONArray recipes) {
+        try {
+            for (int i = 0; i < recipes.length(); i++) {
+                mRecipes.put(recipes.get(i));
+            }
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, e.getMessage(), e);
+            e.printStackTrace();
+        }
+
     }
 
     public int getCount() {
-        return numElements;
+        return mRecipes.length();
     }
 
     public Object getItem (int position) {
@@ -55,23 +63,23 @@ class ImageAdapter extends BaseAdapter {
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.
-                    LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//            imageView.setLayoutParams(new GridView.
+//                    LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageView.setLayoutParams(new GridView.LayoutParams(650, 650));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         } else {
             imageView = (ImageView) convertView;
         }
 
-        if (recipes != null) {
+        if (mRecipes != null) {
             try {
                 //Extracting the poster path from JSONObject
                 final String IMAGE_PATH_KEY = "image";
 
-                String imagePath = recipes.getJSONObject(position).getString(IMAGE_PATH_KEY);
-
-                String url = imagePath;
+                String url = mRecipes.getJSONObject(position).getString(IMAGE_PATH_KEY);
 
                 //Display the poster
-                Picasso.with(mContext).load(url + "/" + imagePath).into(imageView);
+                Picasso.with(mContext).load(url).into(imageView);
 
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
