@@ -17,7 +17,7 @@ import org.json.JSONException;
  * Created by Kevin on 1/28/17.
  */
 
-public class ImageAdapter extends BaseAdapter {
+class ImageAdapter extends BaseAdapter {
 
     private final String LOG_TAG = ImageAdapter.class.getSimpleName();
 

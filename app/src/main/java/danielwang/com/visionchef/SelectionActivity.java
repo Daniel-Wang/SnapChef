@@ -34,7 +34,7 @@ public class SelectionActivity extends AppCompatActivity {
         foodGridView.setAdapter(mImageAdapter);
 
         // Array containing ingredients (should grab from intent)  <---- FIX ME
-        final String[] test = {"Chicken", "Peppers"};
+        final String[] test = {"potatoes", "steak", "wine"};
 
         updateRecipes(test, mCount, foodGridView);
 
