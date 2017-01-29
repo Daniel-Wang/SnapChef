@@ -1,5 +1,6 @@
 package danielwang.com.visionchef;
 
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,12 +22,19 @@ import java.net.URL;
 
 class FetchRecipesTask extends AsyncTask<String[], Void, JSONArray> {
 
+    public static boolean flag = false;
     private final String LOG_TAG = FetchRecipesTask.class.getSimpleName();
     private int mRecipeNum; // indicates the number of the first recipe we should get
+    private ImageAdapter mImageAdapter;
 
-    public FetchRecipesTask(int recipeNum) {
+    public FetchRecipesTask(int recipeNum, ImageAdapter imageAdapter) {
         super();
         mRecipeNum = recipeNum;
+        mImageAdapter = imageAdapter;
+    }
+
+    public ImageAdapter getImageAdapter() {
+        return mImageAdapter;
     }
 
     @Override
@@ -149,9 +157,14 @@ class FetchRecipesTask extends AsyncTask<String[], Void, JSONArray> {
         return null;
     }
 
+
     @Override
     protected void onPostExecute(JSONArray recipesArray) {
+        Log.v(LOG_TAG, "ImageAdapter: " + mImageAdapter.getRecipes());
         super.onPostExecute(recipesArray);
+        mImageAdapter.addRecipes(recipesArray);
+        Log.v(LOG_TAG, "ImageAdapter: " + mImageAdapter.getRecipes());
+        flag = true;
     }
 
     /*
