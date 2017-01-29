@@ -2,17 +2,15 @@ package danielwang.com.visionchef;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -29,12 +27,15 @@ public class SelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
 
+        Intent intent = getIntent();
+        final String [] test = intent.getStringArrayExtra("String");
+
         final GridView foodGridView = (GridView) findViewById(R.id.food_gridview);
         mImageAdapter = new ImageAdapter(this);
         foodGridView.setAdapter(mImageAdapter);
 
         // Array containing ingredients (should grab from intent)  <---- FIX ME
-        final String[] test = {"potatoes", "steak", "wine"};
+        //final String[] test = {"potatoes", "steak", "wine"};
 
         updateRecipes(test, mCount, foodGridView);
 
