@@ -28,12 +28,13 @@ public class SelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selection);
 
         Intent intent = getIntent();
-        final String [] test = intent.getStringArrayExtra("String");
+        final String[] test = intent.getStringArrayExtra("String");
 
         final GridView foodGridView = (GridView) findViewById(R.id.food_gridview);
         mImageAdapter = new ImageAdapter(this);
         foodGridView.setAdapter(mImageAdapter);
 
+        //Log.e("String array: ", String.valueOf(test.length));
         // Array containing ingredients (should grab from intent)  <---- FIX ME
         //final String[] test = {"potatoes", "steak", "wine"};
 
@@ -41,7 +42,7 @@ public class SelectionActivity extends AppCompatActivity {
 
         try {
             //while (!FetchRecipesTask.flag) {
-                Thread.sleep(1000);
+            Thread.sleep(1000);
             //}
         } catch (InterruptedException e) {
 
@@ -78,6 +79,7 @@ public class SelectionActivity extends AppCompatActivity {
         });
 
         Log.v(LOG_TAG, "ImageAdapter: " + mImageAdapter.getRecipes());
+        foodGridView.invalidate();
     }
 
     // checks to see if there is internet access
