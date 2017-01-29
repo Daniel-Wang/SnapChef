@@ -22,6 +22,12 @@ import java.net.URL;
 class FetchRecipesTask extends AsyncTask<String[], Void, JSONArray> {
 
     private final String LOG_TAG = FetchRecipesTask.class.getSimpleName();
+    private int mRecipeNum; // indicates the number of the first recipe we should get
+
+    public FetchRecipesTask(int recipeNum) {
+        super();
+        mRecipeNum = recipeNum;
+    }
 
     @Override
     protected JSONArray doInBackground(String[]... ingredients) {
@@ -56,8 +62,8 @@ class FetchRecipesTask extends AsyncTask<String[], Void, JSONArray> {
                     .appendQueryParameter(APP_INGREDIENTS_PARAM, APP_INGREDIENTS)
                     .appendQueryParameter(APP_ID_PARAM, APP_ID)
                     .appendQueryParameter(APP_KEY_PARAM, APP_KEY)
-                    .appendQueryParameter(APP_FROM_PARAM, "0")
-                    .appendQueryParameter(APP_TO_PARAM, "3")
+                    .appendQueryParameter(APP_FROM_PARAM, Integer.toString(mRecipeNum))
+                    .appendQueryParameter(APP_TO_PARAM, Integer.toString(mRecipeNum + 3))
                     .build();
 
             URL url = new URL(builtUri.toString());

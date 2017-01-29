@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 public class SelectionActivity extends AppCompatActivity {
 
+    //private mImageAdapter = new ImageAdapter();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-
-
 
         /*GridView foodGridView = (GridView) findViewById(R.id.food_gridview);
         foodGridView.setAdapter(new ImageAdapter(this));
@@ -30,9 +30,11 @@ public class SelectionActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }); */
+
+        // Array containing ingredients (should grab from intent)
         String[] test = {"chicken", "tomatoes", "peas"};
 
-        updateRecipes(test);
+        updateRecipes(test, 0);
     }
 
     // checks to see if there is internet access
@@ -43,9 +45,9 @@ public class SelectionActivity extends AppCompatActivity {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    private void updateRecipes(String[] ingredients) {
+    private void updateRecipes(String[] ingredients, int firstRecipeNum) {
         if (isOnline()) {
-            FetchRecipesTask recipesTask = new FetchRecipesTask();
+            FetchRecipesTask recipesTask = new FetchRecipesTask(firstRecipeNum);
             recipesTask.execute(ingredients);
         }
     }
