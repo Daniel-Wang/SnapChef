@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vision Chef</string>
+    <string name="app_name">Clarifai Chef</string>
     <string name="error_while_contacting_api">Error while contacting api</string>
     <string name="no_results_from_api">No results from api</string>
 </resources>
