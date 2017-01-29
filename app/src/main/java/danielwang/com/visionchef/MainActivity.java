@@ -1,6 +1,7 @@
 package danielwang.com.visionchef;
 
 import android.content.Intent;
+
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -31,6 +32,7 @@ import clarifai2.dto.prediction.Concept;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 //        client.getDefaultModels().foodModel().predict().withInputs(ClarifaiInput.forImage(ClarifaiImage.of(new File(originalUri.toString()))));
 
     }
+
 
     private void onImagePicked(@NonNull final byte[] imageBytes) {
         // Now we will upload our image to the Clarifai API
