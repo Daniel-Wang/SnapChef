@@ -2,6 +2,7 @@ package danielwang.com.visionchef;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     private final String LOG_TAG = RecipeDetailsActivity.class.getSimpleName();
     private Context mContext = this;
+    private JSONObject mRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_details);
 
         Intent intent = getIntent();
-        JSONObject mRecipe = null;
+        mRecipe = null;
 
         try {
             mRecipe = new JSONObject(intent.getStringExtra(Intent.EXTRA_TEXT));
@@ -66,15 +68,24 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         foodIngredientsView.setText(ingredientList);
     }
 
-    private String getRecipeURL (JSONObject recipe) {
+    // Onclick method for button to launch URL for full recipe.
+    public void launchRecipe(View view) {
+        Uri recipepage = Uri.EMPTY;
         try {
-            return recipe.getString("url");
+            recipepage = Uri.parse(mRecipe.getString("url").toString());
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
-        } finally {
-            return null;
+        }
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, recipepage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 
 }
+
+
+
