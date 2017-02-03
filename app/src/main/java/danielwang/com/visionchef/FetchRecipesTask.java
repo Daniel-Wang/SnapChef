@@ -54,7 +54,7 @@ class FetchRecipesTask extends AsyncTask<String[], Void, JSONArray> {
             final String APP_ID_PARAM = "app_id";
             final String APP_ID = "13746454";
             final String APP_KEY_PARAM = "app_key";
-            final String APP_KEY = "57da5853d1c482fde9312a2ff7537d41";
+            final String APP_KEY = "Insert App Key here. Can be obtained from https://developer.edamam.com/edamam-recipe-api";
             final String APP_INGREDIENTS_PARAM = "q";
             final String APP_FROM_PARAM = "from";
             final String APP_TO_PARAM = "to";
