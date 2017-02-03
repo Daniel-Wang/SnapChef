@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
     byte[] inputData;
     ClarifaiClient client;
     ImageView imageView;
-    String key_id = "GtNeEBJPRzpNmoz1Fpp9P2jpWjNRBT9fQy7cFQct";
-    String key_secret = "b6ExeI1T50LVQtYXDjl2Gr37tWsKJgzqZZ0SWkAK";
+    // ID and Secret can be obtained from https://clarifai.com/
+    String key_id = "Insert Client ID here.";
+    String key_secret = "Insert Client Secret here.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
